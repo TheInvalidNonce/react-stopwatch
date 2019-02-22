@@ -1,26 +1,56 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Container, Row, Col, Jumbotron } from 'react-bootstrap';
+import Timer from './components/Timer';
 import './App.css';
+import Controls from './components/Controls';
+import SplitTimeList from './components/SplitTimeList';
 
 class App extends Component {
+  constructor() {
+    super();
+    
+    this.state = {
+      splitList: [],
+    }
+  }
+
+  timeFormat = milliseconds => {
+    let remaining = milliseconds / 1000;
+
+    const hh = parseInt(remaining / 1000);
+
+    remaining %= 3600;
+
+    const mm = parseInt(remaining / 60, 10);
+    const ss = parseInt(remaining % 60);
+    const ms = parseInt((milliseconds % 1000) / 100);
+
+    return `${hh}:${mm}:${ss}:${ms}`
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Jumbotron>
+        <Container>
+          <Row>
+            <Col></Col>
+            <Col md="auto">
+              <Timer timeFormat={this.timeFormat}/>
+            </Col>
+            <Col></Col>
+          </Row>
+          <Row>
+          <Col></Col>
+            <Col md="auto">
+              <Controls />
+            </Col>
+            <Col></Col>
+          </Row>
+        </Container>
+        <SplitTimeList 
+          timeFormat={this.timeFormat}
+          splitList={this.state.splitList}/>
+      </Jumbotron>
     );
   }
 }

@@ -12,3 +12,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.timer {
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn {
+  margin: 10px;
+}
+
+div.controls {
+  padding: 20px;
+}
+
+div.splitTimeList {
+  padding: 40px;
+}
+
+div.list-group-item{
+  text-align: center;
+}
