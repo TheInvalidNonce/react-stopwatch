@@ -5,19 +5,17 @@ import { Container } from 'react-bootstrap';
 export default class Timer extends Component {
   constructor() {
     super();
-
-    this.state = {
-      time: 0
-    }
   }
 
   
 
   render() {
+    const { time, timeFormat } = this.props;
+    
     return (
       <Container >
-        <h1>Stopwatch</h1>
-        <h1 className="timer">{this.props.timeFormat(this.state.time)}</h1>
+        <h1 className='title'>React Stopwatch</h1>
+        <h1 className="timer">{timeFormat(time)}</h1>
       </Container>
     )
   }

@@ -10,46 +10,114 @@ class App extends Component {
     super();
     
     this.state = {
+      time: 0,
       splitList: [],
+      isRunning: false,
+      updateInterval: 100
+    }
+
+  }
+
+  padZero = number => {
+    let strNum = String(number)
+    if (strNum.length < 2) {
+      strNum = strNum.padStart(2, '0')
+      return strNum;
+    }
+    else {
+      return strNum;
     }
   }
 
   timeFormat = milliseconds => {
+    const { padZero } = this;
     let remaining = milliseconds / 1000;
 
     const hh = parseInt(remaining / 1000);
 
     remaining %= 3600;
 
-    const mm = parseInt(remaining / 60, 10);
+    const mm = parseInt(remaining / 60, 10).toString(4);
     const ss = parseInt(remaining % 60);
-    const ms = parseInt((milliseconds % 1000) / 100);
+    const ms = parseInt((milliseconds % 1000) / 10, 10);
 
-    return `${hh}:${mm}:${ss}:${ms}`
+    return `${padZero(hh)}:${padZero(mm)}:${padZero(ss)}:${(ms)}`
+  }
+
+  start = () => {
+    const { updateInterval } = this.state;
+    this.setState({
+      running: true
+    }, () => {
+      this.timer = setInterval(() => this.updateTimer(updateInterval), updateInterval)
+    })
+  }
+
+  stop = () => {
+    this.setState({
+      running: false
+    }, () => {
+      clearInterval(this.timer)
+    })
+  }
+
+  reset = () => {  
+    this.setState({
+      time: 0,
+      splitList:[],
+      isRunning: false
+    })
+  }
+
+  addSplit = () => {
+    const { time, splitList } = this.state;
+
+    this.setState({
+      splitList: [...splitList, time]
+    })
+  }
+
+  updateTimer = addTime => {
+    const { time } = this.state;
+    this.setState({
+      time: time + addTime
+    })
+
   }
 
   render() {
+
+    const { time, splitList, isRunning } = this.state
     return (
       <Jumbotron>
         <Container>
           <Row>
             <Col></Col>
             <Col md="auto">
-              <Timer timeFormat={this.timeFormat}/>
+              <Timer
+                time={time} 
+                timeFormat={this.timeFormat}
+              />
             </Col>
             <Col></Col>
           </Row>
           <Row>
           <Col></Col>
             <Col md="auto">
-              <Controls />
+              <Controls 
+                start={() => this.start()}
+                stop={this.stop}
+                reset={this.reset}
+                addSplit={this.addSplit}
+                isRunning={isRunning}
+              />
             </Col>
             <Col></Col>
           </Row>
         </Container>
         <SplitTimeList 
           timeFormat={this.timeFormat}
-          splitList={this.state.splitList}/>
+          splitList={splitList}/>
       </Jumbotron>
     );
   }

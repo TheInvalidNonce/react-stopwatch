@@ -4,19 +4,29 @@ import { Container, Button } from 'react-bootstrap';
 export default class Controls extends Component {
   constructor() {
     super();
-
-    this.state = {
-      isRunning: false
-    }
   }
 
   render() {
+    const { stop, start, reset, addSplit } = this.props
     return (
       <Container className='controls'>
-        <Button variant='success'>Start</Button>
-        <Button variant='danger'>Stop</Button>
-        <Button variant='warning'>Reset</Button>
-        <Button variant='primary'>Split</Button>
+        <Button 
+          variant='success'
+          onClick={() => start()}
+        >Start
+        </Button>
+        <Button 
+          variant='danger'
+          onClick={() => stop()}
+        >Stop</Button>
+        <Button 
+          variant='warning'
+          onClick={() => reset()}
+        >Reset</Button>
+        <Button 
+          variant='primary'
+          onClick={() => addSplit()}
+        >Split</Button>
       </Container>
     )
   }
