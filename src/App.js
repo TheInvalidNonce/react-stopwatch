@@ -13,7 +13,7 @@ class App extends Component {
       time: 0,
       splitList: [],
       isRunning: false,
-      updateInterval: 100
+      updateInterval: 10
     }
 
   }
@@ -41,13 +41,13 @@ class App extends Component {
     const ss = parseInt(remaining % 60);
     const ms = parseInt((milliseconds % 1000) / 10, 10);
 
-    return `${padZero(hh)}:${padZero(mm)}:${padZero(ss)}:${(ms)}`
+    return `${padZero(hh)}:${padZero(mm)}:${padZero(ss)}:${padZero(ms)}`
   }
 
   start = () => {
     const { updateInterval } = this.state;
     this.setState({
-      running: true
+      isRunning: true
     }, () => {
       this.timer = setInterval(() => this.updateTimer(updateInterval), updateInterval)
     })
@@ -55,7 +55,7 @@ class App extends Component {
 
   stop = () => {
     this.setState({
-      running: false
+      isRunning: false
     }, () => {
       clearInterval(this.timer)
     })
@@ -105,7 +105,7 @@ class App extends Component {
           <Col></Col>
             <Col md="auto">
               <Controls 
-                start={() => this.start()}
+                start={this.start}
                 stop={this.stop}
                 reset={this.reset}
                 addSplit={this.addSplit}

@@ -8,14 +8,19 @@ export default class SplitTimeList extends Component {
   }
 
   renderSplitTimeItems() {
-    let lap = 0;
-    let time = 0;
+    const { splitList } = this.props;
 
-    return (
-      <ListGroup>
-        <SplitTimeItem lap={lap} time={time}/>
-      </ListGroup>
-    )
+    return splitList.map( (time, index) => {
+      return (
+        <ListGroup>
+          <SplitTimeItem 
+            key={index}
+            lap={index + 1} 
+            time={time}
+          />
+        </ListGroup>
+      )
+    })
   }
 
   render() {
@@ -25,4 +30,9 @@ export default class SplitTimeList extends Component {
       </Container>
     )
   }
+}
+
+SplitTimeList.defaultProps = {
+  lap: 0,
+  time: 0
 }

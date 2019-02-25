@@ -11,7 +11,7 @@ export default class SplitTimeItem extends Component {
     const { lap, time } = this.props;
     return(
       <ListGroupItem>
-        {lap} : { time }
+        {lap} : { time }ms
       </ListGroupItem>
     )
   }
