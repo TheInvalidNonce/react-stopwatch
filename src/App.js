@@ -46,9 +46,7 @@ class App extends Component {
   start = () => {
     const { updateInterval } = this.state;
     this.setState(
-      {
-        isRunning: true
-      },
+      { isRunning: true},
       () => {
         this.timer = setInterval(
           () => this.updateTimer(updateInterval),
@@ -60,9 +58,7 @@ class App extends Component {
 
   stop = () => {
     this.setState(
-      {
-        isRunning: false
-      },
+      { isRunning: false },
       () => {
         clearInterval(this.timer);
       }
@@ -108,7 +104,7 @@ class App extends Component {
           .trim()
           .slice(0, -2);
         newList = newList.slice(0, clickedSplitIndex);
-        
+
         this.setState({
           splitList: newList,
           time: clickedSplitTime
