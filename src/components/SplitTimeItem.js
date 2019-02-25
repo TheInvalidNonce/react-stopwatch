@@ -1,18 +1,25 @@
-import React, { Component } from 'react';
-import { ListGroupItem } from 'react-bootstrap'
+import React, { Component } from "react";
+import { ListGroup } from "react-bootstrap";
 
 export default class SplitTimeItem extends Component {
-  constructor() {
-    super();
-  }
+
+  handleClick = e => {
+    e.target.classList.add("active");
+  };
 
   render() {
+    const { lap, time, resetSplit } = this.props;
 
-    const { lap, time } = this.props;
-    return(
-      <ListGroupItem>
-        {lap} : { time }ms
-      </ListGroupItem>
-    )
+    return (
+      <ListGroup.Item
+        className='split'
+        onClick={e => {
+          resetSplit(e);
+          this.handleClick(e);
+        }}
+      >
+        {lap}: {time}ms
+      </ListGroup.Item>
+    );
   }
 }

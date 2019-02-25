@@ -17,6 +17,7 @@ code {
   border: 1px solid black;
   border-radius: 5px;
   text-align: center;
+  margin-top: 20px;
 }
 
 .btn {
@@ -28,7 +29,13 @@ div.controls {
 }
 
 div.splitTimeList {
+  display: flex;
+  justify-content: center;
   padding: 40px;
+}
+
+.list-group {
+  width: 400px;
 }
 
 div.list-group-item{
